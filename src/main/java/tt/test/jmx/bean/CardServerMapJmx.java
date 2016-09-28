@@ -29,11 +29,12 @@ public class CardServerMapJmx implements CardServerMapJmxMXBean {
 	public void shutdown(String key) {
 		CardServer s = this.cardServerMap.containsKey(key) ? this.cardServerMap.get(key) : null;
 		if (s != null)
-			s.close();
+			s.shutdown();
 	}
 
 	@Override
 	public void shutdownAll() {
+		System.out.println("Trying to shutdownAll .... ");
 		for (CardServer s : this.cardServerMap.values())
 			s.interrupt();
 	}

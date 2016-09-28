@@ -59,6 +59,7 @@ public class CardServer extends Thread {
 	}
 
 	public void shutdown() {
+		System.out.println(String.format("Trying to shutdown CardServer(%s) .... ", port));
 		interrupt();
 		try {
 			sleep(3000);
