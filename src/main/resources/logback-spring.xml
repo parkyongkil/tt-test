@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration>
+
+	<property resource="application.properties" />
+	<property scope="context" name="cid" value="${card.com.shc.cid}" />
+	<property scope="context" name="card.log.pfx"
+		value="${catalina.base}/logs/${cid}/${cid}-" />
+
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<appender name="ROOT"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<prudent>true</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${card.log.pfx}ROOT.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<charset>MS949</charset>
+			<pattern><![CDATA[%d{yyyy:MM:dd HH:mm:ss.SSS} %-5level [%thread] %logger{35}: %msg %n]]></pattern>
+		</encoder>
+	</appender>
+
+	<appender name="CardClient"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<prudent>true</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${card.log.pfx}CardClient.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<charset>MS949</charset>
+			<pattern><![CDATA[%d{yyyy:MM:dd HH:mm:ss.SSS} %-5level [%thread] %logger{35}: %msg %n]]></pattern>
+		</encoder>
+	</appender>
+
+	<appender name="CardServer"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<prudent>true</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${card.log.pfx}CardServer.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<charset>MS949</charset>
+			<pattern><![CDATA[%d{yyyy:MM:dd HH:mm:ss.SSS} %-5level [%thread] %logger{35}: %msg %n]]></pattern>
+		</encoder>
+	</appender>
+
+	<appender name="MIS"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<prudent>true</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${card.log.pfx}MIS.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<charset>MS949</charset>
+			<pattern><![CDATA[%d{yyyy:MM:dd HH:mm:ss.SSS} %-5level [%thread] %logger{35}: %msg %n]]></pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.apache" level="INFO" />
+	<logger name="org.springframework" level="INFO" />
+
+	<logger name="CardClient" level="INFO" additivity="true">
+		<appender-ref ref="ROOT" />
+		<appender-ref ref="CardClient" />
+	</logger>
+	<logger name="CardServer" level="INFO" additivity="true">
+		<appender-ref ref="ROOT" />
+		<appender-ref ref="CardServer" />
+	</logger>
+	<logger name="MIS" level="INFO" additivity="true">
+		<appender-ref ref="ROOT" />
+		<appender-ref ref="MIS" />
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="ROOT" />
+	</root>
+
+</configuration>

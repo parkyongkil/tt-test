@@ -26,6 +26,13 @@ public class JmxU {
 		mbs.unregisterMBean(oname);
 	}
 
+	public static <X> X getMBean(ObjectName oname, Class<X> c) throws Exception {
+		JMXServiceURL url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://:9999/jmxrmi");
+		JMXConnector jmxc = JMXConnectorFactory.connect(url, null);
+		MBeanServerConnection mbsc = jmxc.getMBeanServerConnection();
+		return JMX.newMBeanProxy(mbsc, oname, c);
+	}
+
 	public static <X> X getMXBean(ObjectName oname, Class<X> c) throws Exception {
 		JMXServiceURL url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://:9999/jmxrmi");
 		JMXConnector jmxc = JMXConnectorFactory.connect(url, null);

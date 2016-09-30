@@ -6,11 +6,11 @@ import java.util.List;
 import tt.test.bean.CardServerHandler;
 import tt.test.bean.CardServerHandlerMap;
 
-public class CardServerMapJmx implements CardServerMapJmxMXBean {
+public class CardServerController implements CardServerMapJmxMXBean {
 
 	CardServerHandlerMap cardServerMap;
 
-	public CardServerMapJmx(CardServerHandlerMap cardServerMap) {
+	public CardServerController(CardServerHandlerMap cardServerMap) {
 		super();
 		this.cardServerMap = cardServerMap;
 	}

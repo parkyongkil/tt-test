@@ -1,10 +1,21 @@
 package tt.test.bean;
 
+import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class CardServer extends Thread {
+/**
+ *
+ *	JAVA ENV
+ *
+ * $(JDK_HOME)/bin/java -Dcom.sun.management.jmxremote.port=9999 \
+ *                      -Dcom.sun.management.jmxremote.authenticate=false \
+ *                      -Dcom.sun.management.jmxremote.ssl=false \
+ *                       com.example.Main
+ */
+
+public class CardServer extends Thread implements CardServerHandler, Serializable {
 
 	int port;
 	ServerSocket serverSocket;
@@ -21,7 +32,8 @@ public class CardServer extends Thread {
 			return;
 		while (!isInterrupted()) {
 			try {
-				serverSocket.accept();
+				if (serverSocket != null && !serverSocket.isClosed())
+					serverSocket.accept();
 			} catch (Exception e) {
 				e.printStackTrace(System.err);
 			}
@@ -58,6 +70,7 @@ public class CardServer extends Thread {
 		}
 	}
 
+	@Override
 	public void shutdown() {
 		System.out.println(String.format("Trying to shutdown CardServer(%s) .... ", port));
 		interrupt();
